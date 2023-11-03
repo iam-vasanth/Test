@@ -45,7 +45,14 @@
                         </li>
                     </ul>
                     <!-- Left links -->
-
+                    {% if user.is_authenticated %}
+                    <div class="d-flex align-items-center">
+                        <a type="button" class="btn btn-link px-3 me-2" href="/logout">
+                            Logout
+                        </a>
+                        
+                    </div>
+                    {% else %}
                     <div class="d-flex align-items-center">
                         <a type="button" class="btn btn-link px-3 me-2" href="/login">
                             Login
@@ -54,6 +61,7 @@
                             Sign up
                         </a>
                     </div>
+                    {% endif %}
                 </div>
                 <!-- Collapsible wrapper -->
             </div>

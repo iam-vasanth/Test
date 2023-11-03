@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block staticfiles %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
 {% block content %}
+
+<!-- Notification bar -->
+<div class="notification">
+    <div class="notification__body">
+        <img src="{% static 'svg/check-circle.svg' %}" alt="Success" class="notification__icon">
+        Your account has been created! &#128640;
+    </div>
+    <div class="notification__progress"></div>
+</div>
+
 <section class="vh-100" style="background-color: #e2d5de;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -45,7 +62,7 @@
     // Get references to the checkbox and the text element
     const strikeCheckbox = document.getElementById("strikeCheckbox");
     const textToStrike = document.getElementById("textToStrike");
-    
+
     // Add an event listener to the checkbox
     strikeCheckbox.addEventListener("change", function () {
         if (strikeCheckbox.checked) {

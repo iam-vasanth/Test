@@ -20,6 +20,7 @@ class SignUp(View):
                                                         password=confirm_password)
                 
                 creating_user.save()
+                auth.login(request, creating_user)
                 messages.info(request, "Welcome to ToDO App")
                 return redirect('/')
 
