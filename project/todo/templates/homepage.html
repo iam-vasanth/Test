@@ -14,9 +14,10 @@
 
                         <h6 class="mb-3">Todo List</h6>
 
-                        <form class="d-flex justify-content-center align-items-center mb-4">
+                        <form class="d-flex justify-content-center align-items-center mb-4" action=" " method="POST">
+                            {% csrf_token %}
                             <div class="form-outline flex-fill">
-                                <input type="text" id="form3" class="form-control form-control-lg" />
+                                <input type="todo_text" id="form3" class="form-control form-control-lg" />
                                 <label class="form-label" for="form3">What do you need to do today?</label>
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg ms-2 add-btn">Add</button>

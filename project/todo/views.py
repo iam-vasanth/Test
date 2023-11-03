@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.views import View
 from django.contrib import messages
+from todo.models import Task
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 
 #Code for Account Sing up
 class SignUp(View):
@@ -60,9 +64,25 @@ def logout(request):
     return redirect('/')
 
 
+# Code for Homepage 
+class HomePage(View):
+    @login_required
+    def post(self, request):
+        task = request.POST.get('todo_text')
 
-def home(request):
-    return render(request, 'homepage.html')
+        creating_task = Task(
+            user=request.user,
+            task=task,
+        )
+        creating_task.save()
+        return HttpResponse("Task created successfully")
+
+    def get(self, request):
+        return render(request, 'homepage.html')
+
+
+# def home(request):
+#     return render(request, 'homepage.html')
 
 def login(request):
     return render(request, 'login.html')
