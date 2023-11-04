@@ -4,8 +4,8 @@ from django.contrib import auth
 from django.views import View
 from django.contrib import messages
 from todo.models import Task
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 #Code for Account Sing up
@@ -65,17 +65,31 @@ def logout(request):
 
 
 # Code for Homepage 
-class HomePage(View):
-    @login_required
-    def post(self, request):
-        task = request.POST.get('todo_text')
+class HomePage(LoginRequiredMixin, View):  # Inherit from LoginRequiredMixin
+    login_url = '/login/'  # Set the login URL
 
-        creating_task = Task(
-            user=request.user,
-            task=task,
-        )
-        creating_task.save()
-        return HttpResponse("Task created successfully")
+    def post(self, request):
+        try:
+            task_text = request.POST.get('todo_text')
+            if not task_text:
+                messages.error(request, 'Task text cannot be empty.')
+                return HttpResponseRedirect('/')
+
+            current_user = request.user
+            task = Task(
+                user=current_user,
+                task=task_text,
+            )
+            task.save()
+
+            messages.success(request, 'Task created successfully.')
+            return redirect('/')
+
+        except Exception as e:
+            print(e)
+            messages.error(request, 'Error creating task: {}'.format(e))
+            return redirect('/')
+
 
     def get(self, request):
         return render(request, 'homepage.html')
