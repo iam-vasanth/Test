@@ -4,8 +4,9 @@ from django.contrib import auth
 from django.views import View
 from django.contrib import messages
 from todo.models import Task
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.http import HttpResponseRedirect
 
 
 #Code for Account Sing up
@@ -73,7 +74,7 @@ class HomePage(LoginRequiredMixin, View):  # Inherit from LoginRequiredMixin
             task_text = request.POST.get('todo_text')
             if not task_text:
                 messages.error(request, 'Task text cannot be empty.')
-                return HttpResponseRedirect('/')
+                return redirect('/')
 
             current_user = request.user
             task = Task(
