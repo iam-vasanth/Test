@@ -9,7 +9,7 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.task} {self.created_at}'
+        return f'{self.user} {self.task}'
 
     class Meta:
-        ordering = ['created_at']
+         get_latest_by = 'created_at'
