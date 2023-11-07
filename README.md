@@ -11,15 +11,12 @@ A simple ToDo application built with Django.
 - [Usage](#usage)
   - [Running the Application](#running-the-application)
   - [Accessing the Web Interface](#accessing-the-web-interface)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
 - User registration and authentication.
 - Create, update, and delete tasks.
 - Mark tasks as completed.
-- List tasks with filtering options.
 - User-friendly web interface.
 
 ## Getting Started
@@ -51,12 +48,12 @@ pip install -r requirements.txt
 python manage.py migrate
 
 
-#Usage
-Running the Application
+##Usage
+###Running the Application
 To run the application locally, use the following command:
 
 python manage.py runserver
 
 
-#Accessing the Web Interface
+###Accessing the Web Interface
 Open a web browser and navigate to http://localhost:8000 to access the application.
