@@ -35,7 +35,6 @@ A simple ToDo application built with Django.
    cd todo-app
    
 2. Create a virtual environment (optional but recommended):
-
   ```python
   python -m venv venv
   source venv/bin/activate  # On Windows, use: venv\Scripts\activate
@@ -47,7 +46,6 @@ A simple ToDo application built with Django.
    ```
 
 4. Set up the database:
-   
   ```python
   python manage.py migrate
   ```
@@ -56,7 +54,6 @@ A simple ToDo application built with Django.
 ##Usage
 ###Running the Application
 To run the application locally, use the following command:
-
   ```python
   python manage.py runserver
   ```
