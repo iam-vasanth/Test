@@ -83,11 +83,15 @@ class HomePage(LoginRequiredMixin, View):  # Inherit from LoginRequiredMixin
             return redirect('/')
 
     def get(self, request):
-        return render(request, 'homepage.html')
+        Current_user = Task.objects.filter(user=request.user).order_by('-created_at')
+        context = {'Current_user': Current_user}
+        return render(request, 'homepage.html', context)
 
 
-# def home(request):
-#     return render(request, 'homepage.html')
+def TaskDelete(request, task_id):
+    Task_del = Task.objects.get(id = task_id)
+    Task_del.delete()
+    return redirect('/')
 
 def login(request):
     return render(request, 'login.html')

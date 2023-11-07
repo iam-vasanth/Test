@@ -7,6 +7,7 @@ urlpatterns=[
     path('login/', SignIn.as_view(), name='Login'),
     path('register/', SignUp.as_view(), name='Register'),
     path('logout/', views.logout, name='Logout'),
+    path('delete/<int:task_id>', views.TaskDelete, name='Delete'),
 
     
 ]

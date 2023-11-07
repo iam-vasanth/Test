@@ -80,7 +80,7 @@
 
     <!-- Notification bar -->
     {% for message in messages %}
-    <div class="notification">
+    <div class="notification" style="z-index: 1000;">
         <div class="notification__body">
             <img src="{% static 'svg/check-circle.svg' %}" alt="Success" class="notification__icon">
             {{message}} &#128640;
