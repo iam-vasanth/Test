@@ -79,7 +79,7 @@ class HomePage(LoginRequiredMixin, View):  # Inherit from LoginRequiredMixin
 
         except Exception as e:
             print(e)
-            messages.error(request, f'Error creating task: {format(e)}')
+            messages.error(request, f'Error creating task: {e}')
             return redirect('/')
 
     def get(self, request):
@@ -89,9 +89,16 @@ class HomePage(LoginRequiredMixin, View):  # Inherit from LoginRequiredMixin
 
 
 def TaskDelete(request, task_id):
-    Task_del = Task.objects.get(id = task_id)
-    Task_del.delete()
-    return redirect('/')
+    try:
+        task = Task.objects.get(id = task_id)
+        if task.user == request.user:
+            task.delete()
+            messages.success(request,'Task has been deleted successfully')
+            return redirect('/')
+    except Exception as e:
+        print(e)
+        messages.error(request, f'Failed. Error {e}')
+        return redirect('/')
 
 def login(request):
     return render(request, 'login.html')
