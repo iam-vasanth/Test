@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/your-username/your-repo.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    dockerImage = docker.build('your-docker-image-name')
+                }
+            }
+        }
+
+        stage('Test Docker Image') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        sh 'echo "Running tests..."'
+                        sh 'pytest'  // Assuming you are using Python for testing
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to EC2') {
+            steps {
+                sshagent (credentials: ['your-ssh-key']) {
+                    sh 'scp docker-compose.yml ubuntu@<EC2-Private-IP>:/home/ubuntu/'
+                    sh 'ssh ubuntu@<EC2-Private-IP> "docker-compose down && docker-compose up -d"'
+                }
+            }
+        }
+    }
+}
